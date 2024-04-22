@@ -5,7 +5,8 @@ String studentName;
 int age;
 String department;
 String studentId;
-public String getStudentName() {
+public String getStudentName() 
+{
 	return studentName;
 }
 public void setStudentName(String studentName) {

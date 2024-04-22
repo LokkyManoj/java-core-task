@@ -8,7 +8,7 @@ public class StudentManagement {
 	public static void main(String[] args) {
 		Validation validate =new Validation();
 		StudentInfo input=new StudentInfo();
-		Scanner sc= new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter your Name :");
 		input.setStudentName(sc.next());
