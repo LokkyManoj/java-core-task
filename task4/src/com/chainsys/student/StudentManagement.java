@@ -50,40 +50,14 @@ public class StudentManagement {
 		System.out.println("Age :"+input.getAge());
 		System.out.println("Department :"+input.getDepartment());
 		System.out.println("Student Id :"+input.getStudentId());
-		Open op=new Open();
-		op.OpenElective();
-		System.out.println("Enter your credits:");
-		int credits=sc.nextInt();
-		if(credits<10) {
-System.out.println("Select only one additional course from above options:");
-int option=sc.nextInt();
-switch(option) {
-case 1:
-	System.out.println("R Programming");
-	System.out.println("The credit for this course is 4");
-	break;
-case 2:
-	System.out.println("Robotics");
-	System.out.println("The credit for this course is 3");
+		/*Open op=new Open();
+		op.OpenElective();*/
+		StudentManagement2 sm=new StudentManagement2();
+		sm.displayAvailableCourses();
+		sm.selectCourse();
 
-break;
-case 3:
-	System.out.println("Advanced java Programming");
-	System.out.println("The credit for this course is 4");
 
-	break;
-case 4:
-	System.out.println("Software Testing");
-	System.out.println("The credit for this course is 2");
+		
 
-	break;
 }
-System.out.println("You have selected above course");
-		}
-		else {
-			System.out.println("You dont need additional courses!");
-		}
-
-	}
-
 }

@@ -3,7 +3,8 @@ package com.chainsys.student;
 import java.util.regex.Pattern;
 
 public class  Validation {
-	public  boolean inputchecker(int n) {
+	public  boolean inputchecker(int n)
+	{
 		while(true){
 		
 			if(n<0) 

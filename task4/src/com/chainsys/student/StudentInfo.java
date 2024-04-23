@@ -1,11 +1,12 @@
 package com.chainsys.student;
 
-public class StudentInfo {
+public class StudentInfo
+{
 String studentName;
 int age;
 String department;
 String studentId;
-public String getStudentName() 
+public String  getStudentName() 
 {
 	return studentName;
 }
@@ -41,7 +42,8 @@ public StudentInfo(String studentName, int age, String department, String studen
 	this.studentId = studentId;
 }
 @Override
-public String toString() {
+public String toString() 
+{
 	return "StudentInfo [studentName=" + studentName + ", age=" + age + ", department=" + department + ", studentId="
 			+ studentId + "]";
 }
