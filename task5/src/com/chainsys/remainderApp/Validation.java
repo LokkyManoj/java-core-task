@@ -28,7 +28,8 @@ public class Validation {
 			        }
 			    }
 			}
-		 public boolean inputchecker1(double n) {
+		 public boolean inputchecker1(double n) 
+		 {
 			    while (true) {
 			        if (n < 0) {
 			            System.out.print("Error! Negative number detected. Cannot proceed. Please enter a valid amount:");
