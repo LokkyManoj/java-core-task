@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Muscle {
 	public void MuscleSelect() {
 		Scanner scanner = new Scanner(System.in);
-		boolean exit=false;
+		boolean exit= false;
 		while(!exit) {
 		System.out.println("Choose the muscle group you want to train:");
 		System.out.println("1. Chest");

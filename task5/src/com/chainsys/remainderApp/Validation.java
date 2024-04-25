@@ -7,7 +7,7 @@ public class Validation {
 	{
 		while(true){
 		
-			if(n<0) 
+			if (n<0) 
 			{
 				System.out.println("Error!Negative number detected.Please Enter a Valid input:");
 				return false;

@@ -4,6 +4,7 @@ public class BmiCalculation {
 String name;
 double height;
 int weight;
+
 public String getName() {
 	return name;
 }
