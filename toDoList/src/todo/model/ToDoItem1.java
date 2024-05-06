@@ -6,7 +6,7 @@ public class ToDoItem1 {
 	public String employeeName;
 	public int taskId;
 	public String task;
-	public String dueDate;
+	public String  dueDate;
 
 	
 	public int getTaskId() {

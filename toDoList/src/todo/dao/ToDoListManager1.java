@@ -7,7 +7,7 @@ import todo.model.ToDoItem1;
 
 
 
-public interface ToDoListManager1 {
+public interface  ToDoListManager1 {
 	boolean signUp(String managerUsername, String managerPassword) throws SQLException;
 
     boolean login(String managerUsername, String managerPassword) throws SQLException;

@@ -23,7 +23,7 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
         try (PreparedStatement statement = connection.prepareStatement(checkIfExistsQuery)) {
             statement.setString(1, managerUsername);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            if  (resultSet.next()) {
                 System.out.println("This username already exists.");
                 return false;
             } else {
