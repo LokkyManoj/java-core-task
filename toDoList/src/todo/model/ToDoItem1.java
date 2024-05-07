@@ -1,12 +1,14 @@
 package todo.model;
 
+import java.util.Date;
+
 public class ToDoItem1 {
 	public String managerUsername;
 	public String managerPassword;
 	public String employeeName;
 	public int taskId;
 	public String task;
-	public String  dueDate;
+	public Date  dueDate;
 
 	
 	public int getTaskId() {
@@ -49,11 +51,11 @@ public class ToDoItem1 {
 		this.task = task;
 	}
 
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import todo.dao.ToDoListManager1;
 import todo.model.ToDoItem1;
@@ -65,7 +67,7 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
             statement.setInt(2, todo.getTaskId());
 
             statement.setString(3, todo.getTask());
-            statement.setString(4, todo.getDueDate());
+            statement.setDate(4, new java.sql.Date(todo.getDueDate().getTime()));
             statement.setString(5, todo.getEmployeeName());
             statement.setString(6, todo.getManagerPassword());
             statement.executeUpdate();
@@ -73,14 +75,16 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
         }
     }
 
-    public void addTask1(String managerUsername, String managerPassword, int taskId,String task, String dueDate, String employeeName) throws SQLException {
+    public void addTask1(String managerUsername, String managerPassword, int taskId,String task, Date dueDate, String employeeName) throws SQLException {
       String add = "INSERT INTO todo4 (manager_username, manager_password,task_id ,task, due_date, employee_name) VALUES (?, ?, ?, ?, ?,?)";
       try (PreparedStatement statement = connection.prepareStatement(add)) {
           statement.setString(1, managerUsername);
           statement.setString(2, managerPassword);
           statement.setInt(3, taskId);
           statement.setString(4, task);
-          statement.setString(5, dueDate);
+          statement.setDate(5, new java.sql.Date(dueDate.getTime()));
+
+          //statement.setString(5, dueDate);
           statement.setString(6, employeeName);
           statement.executeUpdate();
           System.out.println("Task assigned successfully!");
@@ -103,12 +107,14 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
     }
 
     
-    public void updateTask( int taskId, String newTask, String newDueDate, String newEmployeeName) throws SQLException {
+    public void updateTask( int taskId, String newTask, Date newDueDate, String newEmployeeName) throws SQLException {
     	//System.out.println(taskId);
         String update = "UPDATE todo4 SET task = ?, due_date = ?, employee_name = ? WHERE task_id = ? ";
         PreparedStatement statement = connection.prepareStatement(update); 
             statement.setString(1, newTask);
-            statement.setString(2, newDueDate);
+            statement.setDate(2, new java.sql.Date(newDueDate.getTime()));
+
+          //  statement.setString(2, newDueDate);
             statement.setString(3, newEmployeeName);
             statement.setInt(4, taskId);
             
@@ -131,7 +137,9 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
             while(resultSet.next()) {
                 System.out.println("\nTasks assigned by manager " + resultSet.getString("manager_username") + ":");
                 System.out.println("Task: " + resultSet.getString("task"));
-                System.out.println("Due Date: " + resultSet.getString("due_date") + "\n");
+                //System.out.println("Due Date: " + resultSet.getString("due_date") + "\n");
+                System.out.println("Due Date: " + resultSet.getDate("due_date") + "\n");
+
             } 
 //               else { System.out.println("No employee found");
 //            }
@@ -147,7 +155,7 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 String task = resultSet.getString("task");
-                String dueDate = resultSet.getString("due_date");
+                Date dueDate = resultSet.getDate("due_date");
                 tasks.add(new ToDoItem1());
             }
         }
@@ -162,10 +170,34 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 String task = resultSet.getString("task");
-                String dueDate = resultSet.getString("due_date");
+                Date dueDate = resultSet.getDate("due_date");
                 tasks.add(new ToDoItem1());
             }
         }
         return tasks;
     }
+    
+    
+    public void isActive(String managerUsername, String taskId) throws SQLException {
+        String updateIsOverQuery = "UPDATE todo4 SET is_over = ? WHERE manager_username = ? AND task_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(updateIsOverQuery)) {
+            System.out.print("Is the task completed? (Enter 'over' if completed, otherwise leave blank): ");
+            Scanner scanner=new Scanner(System.in);
+            String status = scanner.nextLine();
+            if (status.equalsIgnoreCase("Over")) {
+                statement.setString(1, "Over");
+            } else {
+                statement.setString(2, "Not Over");
+            }
+            statement.setString(2, managerUsername);
+            statement.setString(3, taskId);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Task status updated successfully!");
+            } else {
+                System.out.println("Task not found or you don't have permission to update it.");
+            }
+        }
+    }
+    
 }
