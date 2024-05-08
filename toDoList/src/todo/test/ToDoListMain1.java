@@ -578,7 +578,7 @@ public class ToDoListMain1 {
 		System.out.println("Employee Login:");
 		System.out.print("Enter employee username: ");
 		String employeeUsername = scanner.nextLine();
-		while (!validate.numberchecker(employeeUsername)) {
+		while  (!validate.numberchecker(employeeUsername)) {
 			employeeUsername = scanner.nextLine();
 		}
 

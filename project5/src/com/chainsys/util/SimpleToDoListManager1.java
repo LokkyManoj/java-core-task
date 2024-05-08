@@ -57,7 +57,7 @@ public boolean login(String userName, String password) throws SQLException {
 }
 
 	// Add task to database
-	public void addTask(String userName, String password, String task, String dueDate) throws SQLException {
+	public void addTask1(String userName, String password, String task, String dueDate) throws SQLException {
 		String add = "INSERT INTO todo (username,password,task, due_date) VALUES (?, ?,?,?)";
 		try (PreparedStatement statement = connection.prepareStatement(add)) {
 			statement.setString(1, userName);
@@ -86,14 +86,14 @@ public boolean login(String userName, String password) throws SQLException {
 	// Update task in database by id
 	public void updateTask(int id, String newUserName, String newPassword, String newTask, String newDueDate)
 			throws SQLException {
-		String query = "UPDATE todo SET username=?,password=?,task = ?, due_date = ? WHERE id = ?";
+		String query = "UPDATE todo SET username=?,password=?,task = ?, due_date = ? WHERE task_id = ?";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, newUserName);
 			statement.setString(2, newPassword);
 
 			statement.setString(3, newTask);
 			statement.setString(4, newDueDate);
-			statement.setInt(5, id);
+			statement.setInt(5, );
 			int rowsUpdated = statement.executeUpdate();
 			if (rowsUpdated > 0) {
 				System.out.println("Task updated successfully.");
