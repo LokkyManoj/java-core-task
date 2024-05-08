@@ -8,9 +8,8 @@ public class ToDoItem1 {
 	public String employeeName;
 	public int taskId;
 	public String task;
-	public Date  dueDate;
+	public Date dueDate;
 
-	
 	public int getTaskId() {
 		return taskId;
 	}

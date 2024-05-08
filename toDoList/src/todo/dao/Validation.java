@@ -66,6 +66,7 @@ public class Validation {
 			}
 		}
 	}
+
 //	public boolean dateInputChecker(String word) {
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 //        try {
@@ -82,15 +83,28 @@ public class Validation {
 //        }
 //    }
 	public boolean dateInputChecker(Date inputDate) throws ParseException {
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    Date currentDate = new Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date currentDate = new Date();
 		if (inputDate.before(sdf.parse(sdf.format(currentDate)))) {
-		    System.out.println("Enter a current date or upcoming dates...");
-		    return false;
+			System.out.println("Enter a current date or upcoming dates...");
+			return false;
 		}
 
 		return true;
 	}
-
+	
+	public boolean passWordChecker(String password) {
+        try {
+            String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+.])(?=.*\\d).{8,}$";
+            if (password.matches(regex)) {
+                return true;
+            } else {
+                throw new IllegalArgumentException("Please enter a correct Password.(Atleast one caps,Atleast one number,Atleast one Special Character):");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    } 
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +77,7 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
     }
 
     public void addTask1(String managerUsername, String managerPassword, int taskId,String task, Date dueDate, String employeeName) throws SQLException {
+    	System.out.println(dueDate);
       String add = "INSERT INTO todo4 (manager_username, manager_password,task_id ,task, due_date, employee_name) VALUES (?, ?, ?, ?, ?,?)";
       try (PreparedStatement statement = connection.prepareStatement(add)) {
           statement.setString(1, managerUsername);
@@ -90,6 +92,25 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
           System.out.println("Task assigned successfully!");
       }
   }
+//    public void addTask1(String managerUsername, String managerPassword, int taskId, String task, Date dueDate, String employeeName) throws SQLException {
+//        String add = "INSERT INTO todo4 (manager_username, manager_password, task_id, task, due_date, employee_name) VALUES (?, ?, ?, ?, ?, ?)";
+//        try (PreparedStatement statement = connection.prepareStatement(add)) {
+//            statement.setString(1, managerUsername);
+//            statement.setString(2, managerPassword);
+//            statement.setInt(3, taskId);
+//            statement.setString(4, task);
+//            if (dueDate != null) {
+//                statement.setDate(5, new java.sql.Date(dueDate.getTime()));
+//            } else {
+//                statement.setNull(5, Types.DATE);
+//            }
+//            statement.setString(6, employeeName);
+//            statement.executeUpdate();
+//            System.out.println("Task assigned successfully!");
+//        }
+//    }
+    
+    
     
     
     public void deleteTask( int taskId) throws SQLException {
@@ -199,5 +220,23 @@ public class SimpleToDoListManager1 implements ToDoListManager1{
             }
         }
     }
+    
+    public void displayAllTasks() throws SQLException {
+        String query = "SELECT * FROM todo4";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println("Task ID\tManager Username\tTask\tDue Date\tEmployee Name");
+            System.out.println("----------------------------------------------------------");
+            while (resultSet.next()) {
+                int taskId = resultSet.getInt("task_id");
+                String managerUsername = resultSet.getString("manager_username");
+                String task = resultSet.getString("task");
+                Date dueDate = resultSet.getDate("due_date");
+                String employeeName = resultSet.getString("employee_name");
+                System.out.println(taskId + "\t" + managerUsername + "\t" + task + "\t" + dueDate + "\t" + employeeName);
+            }
+        }
+    }
+
     
 }
